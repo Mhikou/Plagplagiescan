@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Online Plagiarism Checker</title>
+</head>
+<body>
+ 
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Link</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="text" placeholder="Search">
+              <button class="btn btn-primary" type="button">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+      <div class="container-fluid p-5 bg-#cbd5c0 text-black text-center">
+        <h1>Welcome to PlagieScan</h1>
+        <p>Your Friendly Scanner</p> 
+      </div>
+
+
+<div class="container">
+    <h2>PLAGIESCAN</h2>
+
+        <!-- Main Container -->
+        <div class="main-container">
+          <!-- File Upload -->
+          <form class="upload-box">
+            <input type="file" id="fileInput" style="display: none;" />
+            <button type="button" class="upload-btn" onclick="document.getElementById('fileInput').click()">📁Choose File</button>
+            <p id="fileName">No file selected</p>
+            
+            <!-- Scan with Camera -->
+            <button type="button" class="camera-btn" onclick="scanWithCamera()">📷Scan with Camera</button>
+          </form>
+        
+          <!-- Plagiarism Check -->
+          <button class="check-btn" onclick="checkFilePlagiarism()">🔍Check Plagiarism</button>
+        
+          <!-- Text Input for Text Processing -->
+          <div class="text-input-box">
+            <textarea id="textInput" rows="10" cols="50" placeholder="Type or paste your text here"></textarea>
+            <br>
+            <button class="check-btn" onclick="checkTextPlagiarism()">🔍Check Text for Plagiarism</button>
+        
+            <!-- Controls -->
+            <div class="file-options">
+              <span onclick="clearText()">🗑 Clear</span>
+              <span onclick="copyText()">📋 Copy</span>
+            </div>
+          </div>
+        </div>
+      </body>
+      
+      <style>
+      
+        /* Main container and other elements styling */
+        .main-container {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          border: 1px solid #ddd;
+          padding: 20px;
+          max-width: 600px;
+          margin: auto;
+          background-color: #f9f9f9;
+        }
+      
+        .upload-box, .text-input-box {
+          border: 1px solid #ccc;
+          padding: 10px;
+          background-color: #ffffff;
+        }
+      
+        #textInput {
+          resize: vertical;
+          border: 1px solid #ccc;
+          padding: 10px;
+          font-size: 14px;
+        }
+      
+        .check-btn, .camera-btn {
+          margin-top: 10px;
+          background-color: #007bff;
+          color: #ffffff;
+          padding: 10px 15px;
+          border: none;
+          cursor: pointer;
+        }
+      
+        .camera-btn {
+          background-color: #28a745; /* Differentiates the scan button */
+        }
+      
+        .file-options span {
+          margin-right: 15px;
+          cursor: pointer;
+          color: #007bff;
+        }
+      
+        .file-options span:hover {
+          text-decoration: underline;
+        }
+      </style>
+      
+
+
+      <script>
+        // Placeholder function for scanning with the camera
+        function scanWithCamera() {
+          alert("Camera scanning functionality can be implemented using mobile device APIs.");
+        }
+      
+        // Clears the text in the "textInput" textarea
+        function clearText() {
+          document.getElementById("textInput").value = ""; // Clears the textarea value
+        }
+      
+        // Copies the text from the "textInput" textarea to the clipboard
+        function copyText() {
+          const textInput = document.getElementById("textInput");
+          textInput.select();
+          textInput.setSelectionRange(0, 99999); // For mobile compatibility
+          navigator.clipboard.writeText(textInput.value)
+            .then(() => {
+              alert("Text copied to clipboard!"); // Success message
+            })
+            .catch((error) => {
+              alert("Failed to copy text. Error: " + error); // Error handling
+            });
+        }
+      
+        // Function for checking plagiarism for file and text inputs
+        function checkFilePlagiarism() {
+          // Process file and display cited sources in the "cited-sources" textbox
+          document.getElementById("cited-sources").value = "Cited sources for file will appear here."; 
+        }
+      
+        function checkTextPlagiarism() {
+          // Process text and display cited sources in the "cited-sources" textbox
+          document.getElementById("cited-sources").value = "Cited sources for text will appear here."; 
+        }
+      </script>
+      
+      <style>
+        .main-container {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          border: 1px solid #ddd;
+          padding: 20px;
+          max-width: 600px;
+          margin: auto;
+          background-color: #f9f9f9;
+        }
+      
+        .upload-box, .results-box, .text-input-box {
+          border: 1px solid #ccc;
+          padding: 10px;
+          background-color: #ffffff;
+        }
+      
+        #cited-sources {
+          resize: none;
+          background-color: #e9e9e9;
+          color: #666;
+        }
+      
+        #textInput {
+          resize: vertical;
+          border: 1px solid #ccc;
+          padding: 10px;
+          font-size: 14px;
+        }
+      
+        .check-btn, .camera-btn {
+          margin-top: 10px;
+          background-color: #007bff;
+          color: #ffffff;
+          padding: 10px 15px;
+          border: none;
+          cursor: pointer;
+        }
+      
+        .camera-btn {
+          background-color: #28a745; /* Differentiates the scan button */
+        }
+      
+        .file-options span {
+          margin-right: 15px;
+          cursor: pointer;
+          color: #007bff;
+        }
+      
+        .file-options span:hover {
+          text-decoration: underline;
+        }
+      </style>
+      
+      
+      <script>
+        // Function for scanning with the camera (mobile support)
+        function scanWithCamera() {
+          alert("Camera scanning functionality can be implemented using mobile device APIs."); // Placeholder functionality
+          // Implementation example: Use 'MediaDevices.getUserMedia()' for camera access
+        }
+      
+        // Clears the text in the "textInput" textarea
+        function clearText() {
+          document.getElementById("textInput").value = ""; // Clears the textarea value
+        }
+      
+        // Copies the text from the "textInput" textarea to the clipboard
+        function copyText() {
+          const textInput = document.getElementById("textInput");
+          textInput.select();
+          textInput.setSelectionRange(0, 99999); // For mobile compatibility
+          navigator.clipboard.writeText(textInput.value)
+            .then(() => {
+              alert("Text copied to clipboard!"); // Success message
+            })
+            .catch((error) => {
+              alert("Failed to copy text. Error: " + error); // Error handling
+            });
+        }
+      </script>
+      
+      <style>
+        .main-container {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          border: 1px solid #ddd;
+          padding: 20px;
+          max-width: 600px;
+          margin: auto;
+          background-color: #f9f9f9;
+        }
+      
+        .upload-box, .results-box, .text-input-box {
+          border: 1px solid #ccc;
+          padding: 10px;
+          background-color: #ffffff;
+        }
+      
+        #cited-sources {
+          resize: none;
+          background-color: #e9e9e9;
+          color: #666;
+        }
+      
+        #textInput {
+          resize: vertical;
+          border: 1px solid #ccc;
+          padding: 10px;
+          font-size: 14px;
+        }
+      
+        .check-btn, .camera-btn {
+          margin-top: 10px;
+          background-color: #3a698b;
+          color: #ffffff;
+          padding: 10px 15px;
+          border: none;
+          cursor: pointer;
+        }
+      
+        .camera-btn {
+          background-color: #e7410e; /* Different color for distinction */
+        }
+      
+        .file-options span {
+          margin-right: 15px;
+          cursor: pointer;
+          color: #6fa2d8;
+        }
+      
+        .file-options span:hover {
+          text-decoration: underline;
+        }
+      </style>
+      
+      
+
+    <script>
+        async function checkTextPlagiarism() {
+    const text = document.getElementById("textInput").value;
+
+    if (!text.trim()) {
+        alert("Please enter some text.");
+        return;
+    }
+
+    const apiKey = "73440663-5451-4339-8b03-6cf343a7e254"; // Replace with your actual API key
+    const authUrl = "https://id.copyleaks.com/v3/account/login/api";
+    const plagiarismApiUrl = "https://api.copyleaks.com/v3/education/scan";
+
+    // Step 1: Authenticate and get an access token
+    let accessToken;
+    try {
+        const authResponse = await fetch(authUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key: apiKey })
+        });
+
+        if (!authResponse.ok) {
+            throw new Error("Authentication failed!");
+        }
+
+        const authData = await authResponse.json();
+        accessToken = authData.access_token;
+    } catch (error) {
+        console.error("Authentication error:", error);
+        alert("Authentication failed. Please check your API key.");
+        return;
+    }
+
+    // Step 2: Submit the text for plagiarism check
+    const headers = {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+    };
+
+    const payload = {
+        text: text,
+        properties: {
+            webhooks: {
+                status: "https://your-webhook-url-for-status.com",
+                completion: "https://your-webhook-url-for-completion.com"
+            }
+        }
+    };
+
+    document.getElementById("plagiarism-score").textContent = "Checking for plagiarism...";
+    document.getElementById("cited-sources").value = "";
+
+    try {
+        const response = await fetch(plagiarismApiUrl, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error("Submission failed!");
+        }
+
+        const data = await response.json();
+
+        // Process the results
+        let plagiarismScore = 0;
+        let sourcesInfo = "";
+
+        if (data?.results?.sources?.length > 0) {
+            const sources = data.results.sources.map(source => {
+                plagiarismScore += source.percentage;
+                return `${source.url} - ${source.percentage}% match`;
+            }).join("\n");
+
+            sourcesInfo = sources;
+        } else {
+            sourcesInfo = "No plagiarized content detected.";
+        }
+
+        plagiarismScore = Math.min(plagiarismScore, 100); // Cap score at 100%
+
+        // Display results
+        document.getElementById("plagiarism-score").textContent = `Plagiarism Score: ${plagiarismScore}%`;
+        document.getElementById("cited-sources").value = sourcesInfo;
+
+    } catch (error) {
+        console.error("Error during plagiarism check:", error);
+        document.getElementById("plagiarism-score").textContent = "An error occurred while checking plagiarism.";
+    }
+}
+
+    </script>
+</div>
+
+
+<script>
+async function checkFilePlagiarism() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please upload a file.");
+        return;
+    }
+
+    const apiKey = "73440663-5451-4339-8b03-6cf343a7e254"; // Replace with your actual API key
+    const authUrl = "https://id.copyleaks.com/v3/account/login/api";
+    const plagiarismApiUrl = "https://api.copyleaks.com/v3/education/scan";
+
+    const reader = new FileReader();
+    reader.onload = async function (event) {
+        const fileContent = event.target.result;
+
+        // Step 1: Authenticate and get an access token
+        let accessToken;
+        try {
+            const authResponse = await fetch(authUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ key: apiKey })
+            });
+
+            if (!authResponse.ok) {
+                throw new Error("Authentication failed!");
+            }
+
+            const authData = await authResponse.json();
+            accessToken = authData.access_token;
+        } catch (error) {
+            console.error("Authentication error:", error);
+            alert("Authentication failed. Please check your API key.");
+            return;
+        }
+
+       // Step 2: Submit the file for plagiarism check
+const headers = {
+    Authorization: `Bearer ${accessToken}`, // Fixed template literal syntax
+    "Content-Type": "application/json"
+};
+
+        const payload = {
+            base64: btoa(fileContent), // Encode file content in Base64
+            filename: file.name,
+            properties: {
+                webhooks: {
+                    status: "https://your-webhook-url-for-status.com",
+                    completion: "https://your-webhook-url-for-completion.com"
+                }
+            }
+        };
+
+        document.getElementById("plagiarism-score").textContent = "Checking for plagiarism...";
+        document.getElementById("cited-sources").value = "";
+
+        try {
+            const response = await fetch(plagiarismApiUrl, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error("Submission failed!");
+            }
+
+            const data = await response.json();
+
+            // Process the results
+            let plagiarismScore = 0;
+            let sourcesInfo = "";
+
+            if (data?.results?.sources?.length > 0) {
+    const sources = data.results.sources.map(source => {
+        plagiarismScore += source.percentage;
+        return `${source.url} - ${source.percentage}% match`; // Fixed template literal syntax
+    }).join("\n");
+
+    sourcesInfo = sources;
+} else {
+    sourcesInfo = "No plagiarized content detected.";
+}
+
+plagiarismScore = Math.min(plagiarismScore, 100); // Cap score at 100%
+
+// Display results
+document.getElementById("plagiarism-score").textContent = `Plagiarism Score: ${plagiarismScore}%`; // Fixed template literal syntax
+document.getElementById("cited-sources").value = sourcesInfo;
+
+} catch (error) {
+    console.error("Error during plagiarism check:", error);
+    document.getElementById("plagiarism-score").textContent = "An error occurred while checking plagiarism.";
+}
+    
+        };
+
+    reader.readAsText(file);
+}
+
+// Show selected file name
+document.getElementById("fileInput").addEventListener("change", function () {
+    const fileName = this.files.length > 0 ? this.files[0].name : "No file selected";
+    document.getElementById("fileName").textContent = fileName;
+});
+</script>
+
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #dad7cd;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 100000px;
+    margin: auto;
+    background: #6b7a6a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.upload-btn, .check-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #588157;
+    color: white;
+    cursor: pointer;
+}
+.upload-btn:hover, .check-btn:hover {
+    background-color: #588157;
+}
+textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+</style>
+
+</body>
+</html>
